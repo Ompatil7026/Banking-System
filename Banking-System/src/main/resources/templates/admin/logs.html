@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Audit Logs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/js/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Audit Logs</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date & Time</th>
+            <th>User</th>
+            <th>Role</th>
+            <th>Action</th>
+            <th>IP Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${logs}">
+            <td th:text="${#temporals.format(log.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${log.user.username}"></td>
+            <td th:text="${log.userRole}"></td>
+            <td th:text="${log.action}"></td>
+            <td th:text="${log.ip}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/admin/dashboard" class="btn btn-link">Back to Dashboard</a>
+</div>
+</body>
+</html>

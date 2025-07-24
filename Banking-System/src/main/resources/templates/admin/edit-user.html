@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Edit User</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fa;
+            margin: 2rem;
+            color: #333;
+        }
+        .container {
+            max-width: 480px;
+            margin: auto;
+            background: white;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #2563eb;
+            margin-bottom: 1.25rem;
+        }
+        label {
+            font-weight: 600;
+            margin-top: 1rem;
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 0.4rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .btn-group {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        a.cancel-btn {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 600;
+            padding: 10px 24px;
+            line-height: 1.2;
+            border-radius: 25px;
+            border: 1.5px solid #cbd5e1;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a.cancel-btn:hover {
+            background-color: #e2e8f0;
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit User</h2>
+    <form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <label for="username">Username</label>
+        <input type="text" th:field="*{username}" id="username" required/>
+
+        <label for="email">Email</label>
+        <input type="email" th:field="*{email}" id="email" required/>
+
+        <label for="role">Role</label>
+        <select th:field="*{role}" id="role" required>
+            <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">Admin</option>
+            <option value="MANAGER" th:selected="${user.role == 'MANAGER'}">Manager</option>
+            <option value="CUSTOMER" th:selected="${user.role == 'CUSTOMER'}">Customer</option>
+        </select>
+
+        <label for="password">Password <small>(leave blank to keep current)</small></label>
+        <input type="password" th:field="*{password}" id="password" placeholder="••••••"/>
+
+        <label for="enabled">Status</label>
+        <select th:field="*{enabled}" id="enabled" required>
+            <option th:value="true" th:selected="${user.enabled}">Active</option>
+            <option th:value="false" th:selected="${!user.enabled}">Disabled</option>
+        </select>
+
+        <div class="btn-group">
+            <a href="/admin/users" class="cancel-btn">Cancel</a>
+            <button type="submit">Update User</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

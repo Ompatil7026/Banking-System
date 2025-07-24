@@ -1,0 +1,20 @@
+/* Custom Bootstrap overrides - customize colors */
+:root {
+  --bs-primary: #004085;
+  --bs-secondary: #6c757d;
+  --bs-success: #28a745;
+  --bs-danger: #dc3545;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2, h3, h4 {
+  margin-bottom: 1rem;
+}
+
+.btn-link {
+  text-decoration: none;
+}
